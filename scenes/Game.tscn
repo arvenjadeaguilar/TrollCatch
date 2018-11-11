@@ -1,0 +1,185 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://script/Game.gd" type="Script" id=1]
+[ext_resource path="res://assets/background.jpg" type="Texture" id=2]
+[ext_resource path="res://assets/treetop.png" type="Texture" id=3]
+[ext_resource path="res://assets/tree.png" type="Texture" id=4]
+[ext_resource path="res://scenes/Troll.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/apple.png" type="Texture" id=6]
+[ext_resource path="res://fonts/PT_Sans/PT_Sans-Web-Regular.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://fonts/JFRocSol.TTF" type="DynamicFontData" id=8]
+[ext_resource path="res://assets/play.png" type="Texture" id=9]
+
+[sub_resource type="Animation" id=1]
+
+resource_name = "tree_shaking"
+length = 1.0
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("treetop:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 4.0, 0.0, -4.0, 0.0 ]
+}
+
+[sub_resource type="DynamicFont" id=2]
+
+size = 41
+outline_size = 0
+outline_color = Color( 1, 1, 1, 1 )
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 7 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[sub_resource type="DynamicFont" id=3]
+
+size = 92
+outline_size = 0
+outline_color = Color( 1, 1, 1, 1 )
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 8 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[node name="Game" type="Node" index="0"]
+script = ExtResource( 1 )
+
+[node name="background" type="Sprite" parent="." index="0"]
+position = Vector2( 529.274, 298.941 )
+scale = Vector2( 1.799, 1.799 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="treetop" type="Sprite" parent="." index="1"]
+position = Vector2( 527.39, 100.532 )
+scale = Vector2( 1, -1 )
+texture = ExtResource( 3 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="tree" type="Sprite" parent="." index="2"]
+position = Vector2( 544.937, 248.65 )
+scale = Vector2( 1.10845, 1.16826 )
+texture = ExtResource( 4 )
+
+[node name="troll" parent="." index="3" instance=ExtResource( 5 )]
+margin_left = 582.0
+margin_top = 358.0
+margin_right = 807.0
+margin_bottom = 590.0
+rect_scale = Vector2( -1, 1 )
+rect_pivot_offset = Vector2( 105.89, 111.485 )
+
+[node name="animate" type="AnimationPlayer" parent="." index="4"]
+root_node = NodePath("..")
+autoplay = ""
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+anims/tree_shaking = SubResource( 1 )
+blend_times = [  ]
+
+[node name="Timer" type="Timer" parent="." index="5"]
+process_mode = 1
+wait_time = 2.0
+one_shot = false
+autostart = false
+
+[node name="apple" type="Sprite" parent="." index="6"]
+position = Vector2( 63.6447, 55.4345 )
+scale = Vector2( 0.082204, 0.0776598 )
+texture = ExtResource( 6 )
+
+[node name="score" type="Label" parent="." index="7"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 104.0
+margin_top = 36.0
+margin_right = 144.0
+margin_bottom = 90.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 2 )
+text = "0"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Custom Fonts", "custom_fonts/font" ]
+
+[node name="gameover" type="Container" parent="." index="8"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 230.0
+margin_top = 119.0
+margin_right = 819.0
+margin_bottom = 429.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+
+[node name="title" type="Label" parent="gameover" index="0"]
+visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -8.0
+margin_top = 19.0
+margin_right = 613.0
+margin_bottom = 115.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 3 )
+text = "Game Over"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Custom Fonts", "custom_fonts/font" ]
+
+[node name="play" type="TextureButton" parent="gameover" index="1"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 141.0
+margin_top = 131.0
+margin_right = 461.0
+margin_bottom = 319.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+texture_normal = ExtResource( 9 )
+_sections_unfolded = [ "Textures" ]
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="pressed" from="gameover/play" to="." method="_on_play_pressed"]

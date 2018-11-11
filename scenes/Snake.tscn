@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://script/collission_items.gd" type="Script" id=1]
+[ext_resource path="res://assets/snake.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 90.3889, 36.6538 )
+
+[node name="Area2D" type="Area2D" groups=[
+"snake",
+]]
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 1 )
+_sections_unfolded = [ "Script" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
+shape = SubResource( 1 )
+
+[node name="snake" type="Sprite" parent="CollisionShape2D" index="0"]
+position = Vector2( -1.61595, 3.73385 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Transform", "Z Index" ]
+
+[connection signal="area_entered" from="." to="." method="_on_Area2D_area_entered"]
